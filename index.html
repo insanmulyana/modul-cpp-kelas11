@@ -115,12 +115,12 @@
                     <span>📊</span>
                     <span>Unduh CSV Excel</span>
                 </button>
-                <button onclick="triggerPrintPDF()" class="no-print bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow-md shadow-indigo-100">
-                    <span>📄</span>
-                    <span>Cetak PDF</span>
-                </button>
+                <a href="contekan_cpp_kelas11.pdf" download="Lembar_Contekan_CPP_Kelas_XI.pdf" class="no-print bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow-md shadow-indigo-100">
+                    <span>📥</span>
+                    <span>Unduh PDF Contekan</span>
+                </a>
                 <span class="no-print px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
-                    A4 Ready
+                    PDF Ready
                 </span>
             </div>
         </div>
@@ -137,7 +137,7 @@
                     Kerangka Utama Program C++ Kelas XI
                 </h2>
                 <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-                    Setiap program C++ disusun berdasarkan struktur baku yang teratur: modul pustaka, area kerja utama, deklarasi variabel, hingga instruksi keluaran. Pelajari komponennya melalui modul interaktif di bawah ini atau simpan rekap latihan siswa ke Spreadsheet/PDF.
+                    Setiap program C++ disusun berdasarkan struktur baku yang teratur: modul pustaka, area kerja utama, deklarasi variabel, hingga instruksi keluaran. Pelajari komponennya melalui modul interaktif di bawah ini, atau unduh lembar contekan PDF dan simpan rekap latihan siswa ke Spreadsheet.
                 </p>
             </div>
         </section>
@@ -432,7 +432,7 @@
     </main>
 
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 border-t border-slate-200 text-center text-xs text-slate-500">
-        Modul Pembelajaran Interaktif & Lembar Praktikum C++ Kelas XI SMA/SMK • Printable A4 & Spreadsheet Integrated
+        Modul Pembelajaran Interaktif & Lembar Praktikum C++ Kelas XI SMA/SMK • Spreadsheet Integrated
     </footer>
 
     <script>
@@ -478,10 +478,6 @@
                 content: "Sinyal kepada sistem operasi bahwa seluruh proses program telah selesai dijalankan dengan sukses (tanpa error)."
             }
         };
-
-        function triggerPrintPDF() {
-            window.print();
-        }
 
         function highlightSection(sectionKey) {
             const data = detailsData[sectionKey];
