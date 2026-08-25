@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomi & Template Kode C++ Kelas XI (Printable & Spreadsheet Enabled)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px;
+            max-height: 320px;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.08);
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 12mm 12mm 12mm 12mm;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #0f172a !important;
+                font-size: 10pt;
+                padding-bottom: 0 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            header {
+                position: static !important;
+                background: #ffffff !important;
+                border-bottom: 2px solid #e2e8f0 !important;
+                padding-top: 0 !important;
+                padding-bottom: 12px !important;
+            }
+
+            main {
+                max-width: 100% !important;
+                padding: 0 !important;
+                space-y: 16px !important;
+            }
+
+            .print-card {
+                background-color: #ffffff !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .print-break-before {
+                break-before: page;
+                page-break-before: always;
+            }
+
+            .chart-container {
+                height: 240px !important;
+                max-height: 240px !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            input {
+                border: 1px solid #94a3b8 !important;
+                background-color: #f8fafc !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-12">
+
+    <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white text-xl shadow-md shadow-indigo-200">
+                    C++
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900">
+                        Anatomi & Template Kode C++ Standar
+                    </h1>
+                    <p class="text-xs text-slate-500">Modul Pembelajaran Praktikum Kelas XI / Fase F</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="exportToCSV()" class="no-print bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow-md shadow-emerald-100">
+                    <span>📊</span>
+                    <span>Unduh CSV Excel</span>
+                </button>
+                <button onclick="triggerPrintPDF()" class="no-print bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow-md shadow-indigo-100">
+                    <span>📄</span>
+                    <span>Cetak PDF</span>
+                </button>
+                <span class="no-print px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    A4 Ready
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <section class="bg-gradient-to-r from-indigo-50 via-white to-sky-50 border border-indigo-100 rounded-2xl p-5 md:p-6 print-card soft-shadow">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-100 text-indigo-800 text-xs font-semibold">
+                    <span>🚀</span> Panduan Pemrograman C++ SMA/SMK
+                </div>
+                <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">
+                    Kerangka Utama Program C++ Kelas XI
+                </h2>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                    Setiap program C++ disusun berdasarkan struktur baku yang teratur: modul pustaka, area kerja utama, deklarasi variabel, hingga instruksi keluaran. Pelajari komponennya melalui modul interaktif di bawah ini atau simpan rekap latihan siswa ke Spreadsheet/PDF.
+                </p>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <div class="lg:col-span-7 bg-white border border-slate-300 rounded-2xl overflow-hidden print-card">
+                <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                        <span class="ml-2 text-xs font-mono font-semibold text-slate-600">template_kelas11.cpp</span>
+                    </div>
+                    <span class="text-xs text-indigo-700 font-mono font-semibold bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200">
+                        C++ Standard
+                    </span>
+                </div>
+
+                <div class="p-4 bg-slate-50 text-slate-800 code-font text-xs overflow-x-auto leading-relaxed space-y-1">
+                    
+                    <div class="text-slate-500 italic hover:bg-slate-200/60 p-1.5 rounded transition cursor-pointer" onclick="highlightSection('doc')">
+                        /**<br>
+                        &nbsp;* Nama Program : Template C++ Kelas XI<br>
+                        &nbsp;* Deskripsi    : Anatomi Lengkap Struktur C++<br>
+                        &nbsp;*/
+                    </div>
+
+                    <div class="pt-1.5 hover:bg-indigo-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-indigo-600" onclick="highlightSection('header')">
+                        <span class="text-rose-600 font-bold">#include</span> <span class="text-amber-800 font-semibold">&lt;iostream&gt;</span> <span class="text-slate-400 italic ml-2">[BAGIAN 1: Header Pustaka]</span>
+                    </div>
+
+                    <div class="hover:bg-cyan-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-cyan-600" onclick="highlightSection('namespace')">
+                        <span class="text-indigo-600 font-bold">using namespace</span> <span class="text-teal-700 font-bold">std</span>; <span class="text-slate-400 italic ml-2">[BAGIAN 2: Namespace Standar]</span>
+                    </div>
+
+                    <div class="pt-2 hover:bg-emerald-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-emerald-600" onclick="highlightSection('main')">
+                        <span class="text-indigo-600 font-bold">int</span> <span class="text-amber-700 font-bold">main</span>() { <span class="text-slate-400 italic ml-2">[BAGIAN 3: Fungsi Utama]</span>
+                    </div>
+
+                    <div class="pl-5 space-y-1">
+                        <div class="hover:bg-purple-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-purple-600" onclick="highlightSection('variables')">
+                            <span class="text-slate-400 italic">// [BAGIAN 4: Deklarasi Variabel]</span><br>
+                            <span class="text-indigo-600 font-bold">string</span> <span class="text-sky-800 font-semibold">namaSiswa</span> = <span class="text-emerald-700 font-medium">"Siswa Hebat"</span>;<br>
+                            <span class="text-indigo-600 font-bold">int</span> <span class="text-sky-800 font-semibold">tingkatKelas</span> = <span class="text-purple-600 font-bold">11</span>;<br>
+                            <span class="text-indigo-600 font-bold">double</span> <span class="text-sky-800 font-semibold">targetNilai</span> = <span class="text-purple-600 font-bold">95.5</span>;
+                        </div>
+
+                        <div class="pt-1.5 hover:bg-amber-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-amber-600" onclick="highlightSection('output')">
+                            <span class="text-slate-400 italic">// [BAGIAN 5: Output Tampilan]</span><br>
+                            <span class="text-teal-700 font-bold">cout</span> &lt;&lt; <span class="text-emerald-700 font-medium">"Selamat Datang di Kelas C++!"</span> &lt;&lt; <span class="text-teal-700 font-bold">endl</span>;<br>
+                            <span class="text-teal-700 font-bold">cout</span> &lt;&lt; <span class="text-emerald-700 font-medium">"Nama : "</span> &lt;&lt; <span class="text-sky-800 font-semibold">namaSiswa</span> &lt;&lt; <span class="text-teal-700 font-bold">endl</span>;
+                        </div>
+
+                        <div class="pt-1.5 hover:bg-rose-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-rose-600" onclick="highlightSection('logic')">
+                            <span class="text-slate-400 italic">// [BAGIAN 6: Logika Percabangan]</span><br>
+                            <span class="text-rose-600 font-bold">if</span> (<span class="text-sky-800 font-semibold">targetNilai</span> &gt;= <span class="text-purple-600 font-bold">80</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-teal-700 font-bold">cout</span> &lt;&lt; <span class="text-emerald-700 font-medium">"Status: Sangat Baik!"</span> &lt;&lt; <span class="text-teal-700 font-bold">endl</span>;<br>
+                            } <span class="text-rose-600 font-bold">else</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-teal-700 font-bold">cout</span> &lt;&lt; <span class="text-emerald-700 font-medium">"Status: Tingkatkan Belajar!"</span> &lt;&lt; <span class="text-teal-700 font-bold">endl</span>;<br>
+                            }
+                        </div>
+
+                        <div class="pt-1.5 hover:bg-sky-100/70 p-1.5 rounded transition cursor-pointer border-l-2 border-transparent hover:border-sky-600" onclick="highlightSection('return')">
+                            <span class="text-slate-400 italic">// [BAGIAN 7: Penutup Program]</span><br>
+                            <span class="text-rose-600 font-bold">return</span> <span class="text-purple-600 font-bold">0</span>;
+                        </div>
+                    </div>
+
+                    <div>}</div>
+                </div>
+                <div class="bg-slate-100 px-4 py-2 border-t border-slate-200 text-xs text-slate-600 flex items-center justify-between no-print">
+                    <span>💡 Klik baris kode di atas untuk penjelasannya</span>
+                    <span class="text-indigo-700 font-bold">Interactive Inspector</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-4">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 print-card">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <span>🔍</span> Detail Anatomi Kode
+                        </h3>
+                        <span id="active-tag" class="px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            Pilih Bagian
+                        </span>
+                    </div>
+
+                    <div id="explanation-box" class="space-y-2.5 text-xs text-slate-700 min-h-[180px]">
+                        <p class="text-slate-500 text-[11px] leading-relaxed">
+                            Klik salah satu baris kode di editor sebelah kiri untuk membaca penjelasan fungsi, aturan penulisan, serta perannya dalam program C++.
+                        </p>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] space-y-1.5">
+                            <div class="font-bold text-slate-800">Urutan Eksekusi Komputer:</div>
+                            <ol class="list-decimal list-inside space-y-1 text-slate-600">
+                                <li>Membaca Header Pustaka (<code class="text-indigo-700 font-bold">#include</code>)</li>
+                                <li>Menyiapkan ruang nama (<code class="text-indigo-700 font-bold">using namespace</code>)</li>
+                                <li>Masuk ke fungsi utama (<code class="text-indigo-700 font-bold">int main()</code>)</li>
+                                <li>Memproses instruksi variabel & logika</li>
+                                <li>Mengakhiri program (<code class="text-indigo-700 font-bold">return 0</code>)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 space-y-2.5 print-card">
+                    <h4 class="text-[11px] font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <span>⚡</span> Shortcut Penting Pemula
+                    </h4>
+                    <div class="grid grid-cols-2 gap-2 text-[11px]">
+                        <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            <div class="text-indigo-700 font-mono font-bold">cout &lt;&lt;</div>
+                            <div class="text-slate-600 mt-0.5">Cetak output ke layar</div>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            <div class="text-teal-700 font-mono font-bold">cin &gt;&gt;</div>
+                            <div class="text-slate-600 mt-0.5">Terima input pengguna</div>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            <div class="text-emerald-700 font-mono font-bold">\n / endl</div>
+                            <div class="text-slate-600 mt-0.5">Ganti baris baru (Enter)</div>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            <div class="text-amber-700 font-mono font-bold">; (Semicolon)</div>
+                            <div class="text-slate-600 mt-0.5">Wajib di akhir perintah</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 space-y-4 print-card">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span>💻</span> Simulasi Output & Integrasi Spreadsheet
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Ubah data siswa di bawah ini untuk mensimulasikan hasil program C++ sekaligus menyimpan data ke Google Sheets/Excel.</p>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    Spreadsheet Sync Ready
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+                <div class="md:col-span-5 space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200 print-card">
+                    <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Input Parameter Siswa</h4>
+                    
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-700">Nama Siswa (string)</label>
+                        <input type="text" id="sim-nama" value="Budi Santoso" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-700">Tingkat Kelas (int)</label>
+                        <input type="number" id="sim-kelas" value="11" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-700">Target Nilai (double)</label>
+                        <input type="number" id="sim-nilai" value="85.5" step="0.5" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div class="pt-2 grid grid-cols-1 gap-2 no-print">
+                        <button onclick="runSimulation()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs transition shadow-md shadow-indigo-100">
+                            ▶ Jalankan Simulasi
+                        </button>
+                        <button onclick="sendToGoogleSheets()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs transition shadow-md shadow-emerald-100 flex items-center justify-center gap-1.5">
+                            <span>🟢</span>
+                            <span>Kirim ke Google Sheets</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:col-span-7 bg-slate-100 rounded-xl border border-slate-300 p-4 font-mono text-xs text-slate-800 flex flex-col justify-between space-y-3 print-card">
+                    <div>
+                        <div class="text-slate-500 border-b border-slate-300 pb-1.5 mb-2.5 flex items-center justify-between text-[11px] font-bold">
+                            <span>TERMINAL OUTPUT</span>
+                            <span class="text-emerald-700 font-bold">Process exited with code 0</span>
+                        </div>
+                        <div id="terminal-out" class="space-y-1 leading-relaxed">
+                        </div>
+                    </div>
+                    
+                    <div class="no-print pt-2 border-t border-slate-200 space-y-1.5">
+                        <div class="text-[11px] font-bold text-slate-700 flex items-center justify-between">
+                            <span>Link Webhook Google App Script (Opsional Guru):</span>
+                        </div>
+                        <input type="text" id="gsheets-url" placeholder="https://script.google.com/macros/s/AKfycbwR8LPErF5rJZHvasHRZafj9cUq2truMeYV31D6oSZhFwpzZtNl6gpymSYAn0u9OexMjA/exec" class="w-full bg-white border border-slate-300 rounded px-2.5 py-1 text-[11px] text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                        <div id="sync-status" class="text-[10px] text-slate-500">
+                            * Kosongkan jika hanya ingin menggunakan tombol 'Unduh CSV Excel'.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch print-break-before">
+            
+            <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-5 space-y-4 print-card overflow-hidden flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span>📊</span> Ukuran Memori Tipe Data C++
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Alokasi memori RAM yang digunakan oleh tiap tipe data standar C++.</p>
+                </div>
+                
+                <div class="chart-container flex-grow">
+                    <canvas id="dataTypesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 space-y-3 flex flex-col justify-between">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-3 print-card h-full">
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <span>🧠</span> Tipe Data Dasar Kelas XI
+                    </h3>
+                    <div class="space-y-2.5 text-xs">
+                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 font-mono font-bold rounded">int</span>
+                            <div>
+                                <div class="font-bold text-slate-800">Integer (Bilangan Bulat)</div>
+                                <div class="text-slate-600 text-[11px]">Menyimpan angka bulat tanpa koma. Contoh: <code class="text-indigo-700 font-bold">11</code>, <code class="text-indigo-700 font-bold">100</code>, <code class="text-indigo-700 font-bold">-5</code>.</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 bg-teal-100 text-teal-800 font-mono font-bold rounded">double</span>
+                            <div>
+                                <div class="font-bold text-slate-800">Double / Float (Desimal)</div>
+                                <div class="text-slate-600 text-[11px]">Menyimpan angka pecahan/desimal. Contoh: <code class="text-indigo-700 font-bold">95.5</code>, <code class="text-indigo-700 font-bold">3.14</code>.</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 font-mono font-bold rounded">string</span>
+                            <div>
+                                <div class="font-bold text-slate-800">String (Teks / Kalimat)</div>
+                                <div class="text-slate-600 text-[11px]">Menyimpan kumpulan karakter. Wajib menggunakan tanda petik dua (<code class="text-indigo-700 font-bold">"..."</code>).</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-700 font-mono font-bold rounded">bool</span>
+                            <div>
+                                <div class="font-bold text-slate-800">Boolean (Logika)</div>
+                                <div class="text-slate-600 text-[11px]">Hanya bernilai <code class="text-indigo-700 font-bold">true</code> (1) atau <code class="text-indigo-700 font-bold">false</code> (0).</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bg-gradient-to-r from-indigo-50 via-sky-50 to-emerald-50 border border-indigo-200 rounded-2xl p-5 md:p-6 space-y-4 print-card">
+            <div>
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <span>🎯</span> Lembar Tantangan Praktikum Siswa
+                </h3>
+                <p class="text-xs text-slate-600 mt-0.5">Lakukan percobaan modifikasi kode pada IDE milikmu dan centang capaian tugas di bawah ini!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <label class="p-3 bg-white/90 rounded-xl border border-indigo-100 shadow-sm flex items-start gap-2.5 cursor-pointer hover:border-indigo-300 transition print-card">
+                    <input type="checkbox" id="challenge-1" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 bg-white border-slate-300">
+                    <div class="space-y-0.5">
+                        <span class="text-xs font-bold text-indigo-900 block">Tantangan 1</span>
+                        <p class="text-[11px] text-slate-600">Ganti isi variabel <code class="text-indigo-700 font-bold">namaSiswa</code> dengan nama lengkapmu sendiri.</p>
+                    </div>
+                </label>
+
+                <label class="p-3 bg-white/90 rounded-xl border border-indigo-100 shadow-sm flex items-start gap-2.5 cursor-pointer hover:border-indigo-300 transition print-card">
+                    <input type="checkbox" id="challenge-2" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 bg-white border-slate-300">
+                    <div class="space-y-0.5">
+                        <span class="text-xs font-bold text-indigo-900 block">Tantangan 2</span>
+                        <p class="text-[11px] text-slate-600">Ubah nilai <code class="text-indigo-700 font-bold">targetNilai</code> menjadi 75 lalu amati perubahan pesan statusnya.</p>
+                    </div>
+                </label>
+
+                <label class="p-3 bg-white/90 rounded-xl border border-indigo-100 shadow-sm flex items-start gap-2.5 cursor-pointer hover:border-indigo-300 transition print-card">
+                    <input type="checkbox" id="challenge-3" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 bg-white border-slate-300">
+                    <div class="space-y-0.5">
+                        <span class="text-xs font-bold text-indigo-900 block">Tantangan 3</span>
+                        <p class="text-[11px] text-slate-600">Tambahkan baris <code class="text-indigo-700 font-bold">cout</code> baru untuk mencetak hobi atau cita-citamu!</p>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 border-t border-slate-200 text-center text-xs text-slate-500">
+        Modul Pembelajaran Interaktif & Lembar Praktikum C++ Kelas XI SMA/SMK • Printable A4 & Spreadsheet Integrated
+    </footer>
+
+    <script>
+        const detailsData = {
+            doc: {
+                title: "Dokumentasi / Komentar",
+                badge: "Non-Executable",
+                content: "Komentar diawali // atau diapit /* ... */. Komputer mengabaikan bagian ini. Digunakan untuk memberi catatan petunjuk agar kode mudah dipahami."
+            },
+            header: {
+                title: "Header Preprocessor (#include)",
+                badge: "Library Import",
+                content: "#include <iostream> memanggil pustaka bawaan C++ untuk proses Input-Output. Tanpa ini, perintah 'cout' dan 'cin' tidak akan dikenali."
+            },
+            namespace: {
+                title: "Namespace Standard (using namespace std;)",
+                badge: "Global Scope",
+                content: "Menentukan ruang nama standar agar kita dapat langsung mengetik 'cout' tanpa perlu menuliskan 'std::cout' secara berulang."
+            },
+            main: {
+                title: "Fungsi Utama (int main())",
+                badge: "Entry Point",
+                content: "Titik awal berjalannya program. Komputer selalu mencari dan mengeksekusi instruksi di dalam kurung kurawal fungsi main() terlebih dahulu."
+            },
+            variables: {
+                title: "Deklarasi Variabel",
+                badge: "Memory Allocation",
+                content: "Variabel adalah wadah penyimpanan data di RAM. Setiap variabel harus memiliki tipe data spesifik seperti string, int, atau double."
+            },
+            output: {
+                title: "Output / Tampilan (cout)",
+                badge: "I/O Operation",
+                content: "Perintah 'cout' dengan operator '<<' berfungsi mencetak teks atau nilai variabel ke layar terminal monitor."
+            },
+            logic: {
+                title: "Percabangan Logika (if-else)",
+                badge: "Control Flow",
+                content: "Struktur pengambil keputusan. Jika kondisi dalam kurung bernilai benar (true), blok 'if' dieksekusi. Jika salah, blok 'else' yang berjalan."
+            },
+            return: {
+                title: "Penutup Program (return 0;)",
+                badge: "Exit Code",
+                content: "Sinyal kepada sistem operasi bahwa seluruh proses program telah selesai dijalankan dengan sukses (tanpa error)."
+            }
+        };
+
+        function triggerPrintPDF() {
+            window.print();
+        }
+
+        function highlightSection(sectionKey) {
+            const data = detailsData[sectionKey];
+            if (!data) return;
+
+            document.getElementById('active-tag').innerText = data.badge;
+            document.getElementById('explanation-box').innerHTML = `
+                <h4 class="text-xs font-bold text-indigo-700">${data.title}</h4>
+                <p class="text-slate-600 text-[11px] leading-relaxed">${data.content}</p>
+                <div class="pt-1.5 border-t border-slate-100 text-[11px] text-slate-500">
+                    📌 Pastikan setiap instruksi dalam fungsi diakhiri tanda titik koma (<code class="text-indigo-700 font-bold">;</code>).
+                </div>
+            `;
+        }
+
+        function runSimulation() {
+            const nama = document.getElementById('sim-nama').value || "Siswa";
+            const kelas = document.getElementById('sim-kelas').value || "11";
+            const nilai = parseFloat(document.getElementById('sim-nilai').value) || 0;
+
+            let statusText = "";
+            if (nilai >= 80) {
+                statusText = "Status: Sangat Baik! Pertahankan prestasimu.";
+            } else {
+                statusText = "Status: Cukup Baik! Ayo tingkatkan belajar lagi.";
+            }
+
+            const terminalHtml = `
+                <div class="text-slate-600">=========================================</div>
+                <div class="text-indigo-700 font-bold">   SELAMAT DATANG DI KELAS PEMROGRAMAN   </div>
+                <div class="text-slate-600">=========================================</div>
+                <div>Halo, <span class="text-indigo-800 font-bold">${nama}</span>! Kamu berada di kelas <span class="text-purple-700 font-bold">${kelas}</span>.</div>
+                <div>Target nilai Informatika kamu: <span class="text-amber-800 font-bold">${nilai}</span></div>
+                <br>
+                <div class="${nilai >= 80 ? 'text-emerald-700' : 'text-amber-700'} font-bold">${statusText}</div>
+                <br>
+                <div class="text-slate-600">-----------------------------------------</div>
+                <div class="text-slate-500 italic">Program selesai berjalan dengan sukses.</div>
+            `;
+
+            document.getElementById('terminal-out').innerHTML = terminalHtml;
+        }
+
+        function getStudentData() {
+            const nama = document.getElementById('sim-nama').value || "Siswa";
+            const kelas = document.getElementById('sim-kelas').value || "11";
+            const nilai = document.getElementById('sim-nilai').value || "0";
+            const c1 = document.getElementById('challenge-1').checked ? "Selesai" : "Belum";
+            const c2 = document.getElementById('challenge-2').checked ? "Selesai" : "Belum";
+            const c3 = document.getElementById('challenge-3').checked ? "Selesai" : "Belum";
+            const timestamp = new Date().toLocaleString('id-ID');
+
+            return { timestamp, nama, kelas, nilai, c1, c2, c3 };
+        }
+
+        function exportToCSV() {
+            const data = getStudentData();
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + "Waktu,Nama Siswa,Kelas,Target Nilai,Tantangan 1,Tantangan 2,Tantangan 3\n"
+                + `"${data.timestamp}","${data.nama}","${data.kelas}","${data.nilai}","${data.c1}","${data.c2}","${data.c3}"`;
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Rekap_C++_${data.nama.replace(/\s+/g, '_')}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function sendToGoogleSheets() {
+            const webhookUrl = document.getElementById('gsheets-url').value.trim();
+            const statusEl = document.getElementById('sync-status');
+            const data = getStudentData();
+
+            if (!webhookUrl) {
+                alert("Silakan masukkan URL Webhook Google Apps Script terlebih dahulu, atau gunakan tombol 'Unduh CSV Excel' untuk mengunduh file secara lokal.");
+                return;
+            }
+
+            statusEl.innerHTML = "<span class='text-amber-600 font-bold'>⏳ Mengirim data ke Google Sheets...</span>";
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                statusEl.innerHTML = "<span class='text-emerald-700 font-bold'>✅ Data berhasil terkirim ke Google Sheets!</span>";
+            })
+            .catch(error => {
+                statusEl.innerHTML = "<span class='text-rose-600 font-bold'>❌ Gagal mengirim data. Periksa koneksi atau URL Webhook.</span>";
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            runSimulation();
+
+            const ctx = document.getElementById('dataTypesChart').getContext('2d');
+            
+            const rawLabels = [
+                'bool (Logika Boolean)', 
+                'int (Angka Bulat)', 
+                'double (Angka Pecahan)', 
+                'string (Karakter Teks)'
+            ];
+
+            const processedLabels = rawLabels.map(label => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    
+                    words.forEach(word => {
+                        if ((currentLine + ' ' + word).trim().length > 16) {
+                            lines.push(currentLine.trim());
+                            currentLine = word;
+                        } else {
+                            currentLine += (currentLine ? ' ' : '') + word;
+                        }
+                    });
+                    if (currentLine) lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: processedLabels,
+                    datasets: [{
+                        label: 'Ukuran Standar Memori (Byte)',
+                        data: [1, 4, 8, 24],
+                        backgroundColor: [
+                            'rgba(217, 119, 6, 0.85)',
+                            'rgba(79, 70, 229, 0.85)',
+                            'rgba(13, 148, 136, 0.85)',
+                            'rgba(225, 29, 72, 0.85)'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 5,
+                            left: 5,
+                            right: 5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                        return label.join(' ');
+                                    } else {
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 28,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                color: '#475569',
+                                stepSize: 5,
+                                callback: function(value) {
+                                    return value + ' Byte';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#475569',
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
